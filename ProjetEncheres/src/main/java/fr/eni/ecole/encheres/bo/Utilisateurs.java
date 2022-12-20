@@ -2,16 +2,16 @@ package fr.eni.ecole.encheres.bo;
 
 public class Utilisateurs {
 	
-	private int no_utilisateur;
+	private int noUtilisateur;
 	private String pseudo; 
 	private String nom;
 	private String prenom;
 	private String email;
 	private int telephone;
 	private String rue;
-	private int code_postal;
+	private int codePostal;
 	private String ville;
-	private String mot_de_passe;
+	private String motDePasse;
 	private int credit;
 	private int administrateur;
 	
@@ -19,29 +19,29 @@ public class Utilisateurs {
 		
 	}
 	
-	public Utilisateurs(int no_utilisateur, String pseudo, String nom, String prenom, String email, int telephone,
-			String rue, int code_postal, String ville, String mot_de_passe, int credit, int administrateur) {
+	public Utilisateurs(int noUtilisateur, String pseudo, String nom, String prenom, String email, int telephone,
+			String rue, int codePostal, String ville, String motDePasse, int credit, int administrateur) {
 		super();
-		this.no_utilisateur = no_utilisateur;
+		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.telephone = telephone;
 		this.rue = rue;
-		this.code_postal = code_postal;
+		this.codePostal = codePostal;
 		this.ville = ville;
-		this.mot_de_passe = mot_de_passe;
+		this.motDePasse = motDePasse;
 		this.credit = credit;
 		this.administrateur = administrateur;
 	}
 
-	public int getNo_utilisateur() {
-		return no_utilisateur;
+	public int getNoUtilisateur() {
+		return noUtilisateur;
 	}
 
-	public void setNo_utilisateur(int no_utilisateur) {
-		this.no_utilisateur = no_utilisateur;
+	public void setNoUtilisateur(int noUtilisateur) {
+		this.noUtilisateur = noUtilisateur;
 	}
 
 	public String getPseudo() {
@@ -92,12 +92,12 @@ public class Utilisateurs {
 		this.rue = rue;
 	}
 
-	public int getCode_postal() {
-		return code_postal;
+	public int getCodePostal() {
+		return codePostal;
 	}
 
-	public void setCode_postal(int code_postal) {
-		this.code_postal = code_postal;
+	public void setCodePostal(int codePostal) {
+		this.codePostal = codePostal;
 	}
 
 	public String getVille() {
@@ -108,12 +108,12 @@ public class Utilisateurs {
 		this.ville = ville;
 	}
 
-	public String getMot_de_passe() {
-		return mot_de_passe;
+	public String getMotDePasse() {
+		return motDePasse;
 	}
 
-	public void setMot_de_passe(String mot_de_passe) {
-		this.mot_de_passe = mot_de_passe;
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
 	}
 
 	public int getCredit() {
@@ -134,9 +134,9 @@ public class Utilisateurs {
 
 	@Override
 	public String toString() {
-		return "Utilisateurs [no_utilisateur=" + no_utilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
-				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", code_postal="
-				+ code_postal + ", ville=" + ville + ", mot_de_passe=" + mot_de_passe + ", credit=" + credit
+		return "Utilisateurs [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
+				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
 				+ ", administrateur=" + administrateur + "]";
 	}
 	
