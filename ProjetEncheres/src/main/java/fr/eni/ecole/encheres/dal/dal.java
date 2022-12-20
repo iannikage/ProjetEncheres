@@ -1,4 +1,4 @@
-package fr.eni.ecole.dal;
+package fr.eni.ecole.encheres.dal;
 
 public class dal {
 

@@ -1,4 +1,4 @@
-package fr.eni.ecole.bo;
+package fr.eni.ecole.encheres.bo;
 
 public class bo {
 
