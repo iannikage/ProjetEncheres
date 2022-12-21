@@ -12,7 +12,7 @@
 	Vendre un article
 	Mon Profil
 	Déconnexion</header>
-	
+	<br>
 	<h1>Liste des enchères</h1>
 	
 	Filtres : <br>
