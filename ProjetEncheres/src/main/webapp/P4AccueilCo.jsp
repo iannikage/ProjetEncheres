@@ -16,7 +16,7 @@
 	<h1>Liste des enchères</h1>
 	
 	Filtres : <br>
-	<input type="text" name="article" placehoder="Le nom de l'article" autofocus="autofocus"/><br>
+	<input type="text" name="article" placeholder="Le nom de l'article" autofocus="autofocus"/><br>
 
 	Catégorie : <label for="categories"></label>
 				<select name="categories">
