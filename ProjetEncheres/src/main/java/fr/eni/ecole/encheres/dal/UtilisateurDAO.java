@@ -29,12 +29,13 @@ public class UtilisateurDAO {
 		return instance;
 	}
 	
+	
+	
 	public void save(Utilisateur utilisateur) {
 
 		try {
 			Connection con = connectionBDD();
-			//mettre noUtilisateur/credit/admin, si oui ici ?
-			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Utilisateurs (noUtilisateur,pseudo,nom,prenom,email,telephone,rue,codePostal,ville,motDePasse,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Utilisateurs (no_utilisateur,pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
 			pstmt.setInt(1, utilisateur.getNoUtilisateur());
 			pstmt.setString(2, utilisateur.getPseudo());
 			pstmt.setString(3, utilisateur.getNom());
@@ -55,9 +56,7 @@ public class UtilisateurDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		} 
 	}
 	
 	public void update(Utilisateur c) {
@@ -66,21 +65,17 @@ public class UtilisateurDAO {
 			Connection con = connectionBDD();
 
 			
-			PreparedStatement pstmt = con.prepareStatement("update Utilisateurs set noUtilisateur=?,pseudo=?,nom=?,prenom=?,email=?,telephone=?,rue=?,codePostal=?,ville=?,motDePasse=?,credit=?,administrateur=?");
-			//mettre noUtilisateur/credit/admin, si oui ici ?
-			pstmt.setInt(1, c.getNoUtilisateur());
-			pstmt.setString(2, c.getPseudo());
-			pstmt.setString(3, c.getNom());
-			pstmt.setString(4, c.getPrenom());
-			pstmt.setString(5, c.getEmail());
-			pstmt.setInt(6, c.getTelephone());
-			pstmt.setString(7, c.getRue());
-			pstmt.setInt(8, c.getCodePostal());
-			pstmt.setString(9, c.getVille());
-			pstmt.setString(10, c.getMotDePasse());
-			//pstmt.setInt(5, c.getId());
-			pstmt.setInt(11, c.getCredit());
-			pstmt.setInt(12, c.getAdministrateur());
+			PreparedStatement pstmt = con.prepareStatement("update Utilisateurs set pseudo=?,nom=?,prenom=?,email=?,telephone=?,rue=?,code_postal=?,ville=?,mot_de_passe=?");
+			
+			pstmt.setString(1, c.getPseudo());
+			pstmt.setString(2, c.getNom());
+			pstmt.setString(3, c.getPrenom());
+			pstmt.setString(4, c.getEmail());
+			pstmt.setInt(5, c.getTelephone());
+			pstmt.setString(6, c.getRue());
+			pstmt.setInt(7, c.getCodePostal());
+			pstmt.setString(8, c.getVille());
+			pstmt.setString(9, c.getMotDePasse());
 			//securiser mdp avec hashPwd
 			
 			pstmt.executeUpdate();
@@ -88,45 +83,47 @@ public class UtilisateurDAO {
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		} 
 	}
 	
-	public void deleteByMail(String email) {
 
-		try {
-			Connection con = connectionBDD();
-
-			PreparedStatement pstmt = con.prepareStatement("DELETE FROM Utilisateurs WHERE email like ? ");
-			pstmt.setString(1, email);
-			pstmt.executeUpdate();
-
-			con.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public void deleteByNoUtilisateur(int noUtilisateur) {
 
 		try {
 			Connection con = connectionBDD();
 
-			PreparedStatement pstmt = con.prepareStatement("DELETE FROM Utilisateurs WHERE noUtilisateur=?");
+			PreparedStatement pstmt = con.prepareStatement("DELETE FROM Utilisateurs WHERE no_utilisateur=?");
 			pstmt.setInt(1, noUtilisateur);
 			pstmt.executeUpdate();
 
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		} 
 
 }
+	
+
+	private Utilisateur userFromRs (ResultSet res) throws SQLException {
+		Utilisateur utilisateur;
+		utilisateur = new Utilisateur();
+		utilisateur.setNoUtilisateur(res.getInt("no_utilisateur"));
+		utilisateur.setPseudo(res.getString("pseudo"));
+		utilisateur.setNom(res.getString("nom"));
+		utilisateur.setPrenom(res.getString("prenom"));
+		utilisateur.setEmail(res.getString("email"));
+		utilisateur.setTelephone(res.getInt("telephone"));
+		utilisateur.setRue(res.getString("rue"));
+		utilisateur.setCodePostal(res.getInt("code_postal"));
+		utilisateur.setVille(res.getString("ville"));
+		utilisateur.setMotDePasse(res.getString("mot_de_passe"));
+		utilisateur.setCredit(res.getInt("credit"));
+		utilisateur.setAdministrateur(res.getInt("administrateur"));
+		return utilisateur;
+	}
+	
+	
+	
 	public List<Utilisateur> findAll(String field, String sens) {
 
 		List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
@@ -144,35 +141,30 @@ public class UtilisateurDAO {
 			}
 
 			
-	
 			ResultSet res = pstmt.executeQuery();
 
 			while (res.next()) {
 				Utilisateur utilisateur = new Utilisateur();
-				utilisateur.setNoUtilisateur(res.getInt("noUtilisateur"));
+				utilisateur.setNoUtilisateur(res.getInt("no_utilisateur"));
 				utilisateur.setPseudo(res.getString("pseudo"));
 				utilisateur.setNom(res.getString("nom"));
 				utilisateur.setPrenom(res.getString("prenom"));
 				utilisateur.setEmail(res.getString("email"));
 				utilisateur.setTelephone(res.getInt("telephone"));
 				utilisateur.setRue(res.getString("rue"));
-				utilisateur.setCodePostal(res.getInt("codePostal"));
+				utilisateur.setCodePostal(res.getInt("code_postal"));
 				utilisateur.setVille(res.getString("ville"));
-				utilisateur.setMotDePasse(res.getString("motDePasse"));
+				utilisateur.setMotDePasse(res.getString("mot_de_passe"));
 				utilisateur.setCredit(res.getInt("credit"));
 				utilisateur.setAdministrateur(res.getInt("administrateur"));
-				//utilisateur.setId(res.getInt("id"));
-	
-			
+							
 				utilisateurs.add(utilisateur);
 
 			}
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		} 
 		return utilisateurs;
 	}
 	
@@ -181,32 +173,19 @@ public class UtilisateurDAO {
 		Utilisateur utilisateur=null;
 		try {
 			Connection con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Utilisateurs where noUtilisateur=?");
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Utilisateurs where no_utilisateur=?");
 			pstmt.setInt(1,noUtilisateur);
 			ResultSet res = pstmt.executeQuery();
 			if(res.next()) 
-			{
-				 utilisateur= new Utilisateur();
-				 utilisateur.setNoUtilisateur(res.getInt("noUtilisateur"));
-					utilisateur.setPseudo(res.getString("pseudo"));
-					utilisateur.setNom(res.getString("nom"));
-					utilisateur.setPrenom(res.getString("prenom"));
-					utilisateur.setEmail(res.getString("email"));
-					utilisateur.setTelephone(res.getInt("telephone"));
-					utilisateur.setRue(res.getString("rue"));
-					utilisateur.setCodePostal(res.getInt("codePostal"));
-					utilisateur.setVille(res.getString("ville"));
-					utilisateur.setMotDePasse(res.getString("motDePasse"));
-					utilisateur.setCredit(res.getInt("credit"));
-					utilisateur.setAdministrateur(res.getInt("administrateur"));
+			{ 
+				utilisateur = userFromRs (res);
+				
 			}
 			con.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		} 
 		return utilisateur;
 	}
 	
@@ -220,27 +199,16 @@ public class UtilisateurDAO {
 			ResultSet res = pstmt.executeQuery();
 			if(res.next()) 
 			{
-				 utilisateur= new Utilisateur();
-				 utilisateur.setNoUtilisateur(res.getInt("noUtilisateur"));
-					utilisateur.setPseudo(res.getString("pseudo"));
-					utilisateur.setNom(res.getString("nom"));
-					utilisateur.setPrenom(res.getString("prenom"));
-					utilisateur.setEmail(res.getString("email"));
-					utilisateur.setTelephone(res.getInt("telephone"));
-					utilisateur.setRue(res.getString("rue"));
-					utilisateur.setCodePostal(res.getInt("codePostal"));
-					utilisateur.setVille(res.getString("ville"));
-					utilisateur.setMotDePasse(res.getString("motDePasse"));
-					utilisateur.setCredit(res.getInt("credit"));
-					utilisateur.setAdministrateur(res.getInt("administrateur"));
+				{ 
+					utilisateur = userFromRs (res);
+					
+				}
 
 			}
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		} 
 		return utilisateur;
 	}
 	
@@ -249,37 +217,24 @@ public class UtilisateurDAO {
 		Utilisateur utilisateur=null;
 		try {
 			Connection con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Utilisateurs where email=? and motDePasse=?");
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Utilisateurs where email=? and mot_de_passe=?");
 			pstmt.setString(1,email);
 			pstmt.setString(2,motDePasse);
 			ResultSet res = pstmt.executeQuery();
 			if(res.next()) 
-			{
-				utilisateur= new Utilisateur();
-				utilisateur.setPseudo(res.getString("pseudo"));
-				utilisateur.setNom(res.getString("nom"));
-				utilisateur.setPrenom(res.getString("prenom"));
-				utilisateur.setEmail(res.getString("email"));
-				utilisateur.setTelephone(res.getInt("telephone"));
-				utilisateur.setRue(res.getString("rue"));
-				utilisateur.setCodePostal(res.getInt("codePostal"));
-				utilisateur.setVille(res.getString("ville"));
-				utilisateur.setMotDePasse(res.getString("motDePasse"));
-				utilisateur.setCredit(res.getInt("credit"));
-				utilisateur.setAdministrateur(res.getInt("administrateur"));
+			{ 
+				utilisateur = userFromRs (res);
 				
 			}
 			con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		} 
 		return utilisateur;
 	}
 	
 	
-	private static Connection connectionBDD() throws ClassNotFoundException, SQLException {
+	private static Connection connectionBDD() throws SQLException {
 		/*	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			String url = "jdbc:sqlserver://localhost:1433;database=Annuaire"; // fabriquer l'url de connexion
 			Connection con = DriverManager.getConnection(url, "sa", "Pa$$w0rd"); // lance la connexion*/
