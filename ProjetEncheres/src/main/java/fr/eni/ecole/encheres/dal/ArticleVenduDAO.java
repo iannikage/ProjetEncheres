@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.naming.InitialContext;
@@ -60,6 +61,8 @@ public class ArticleVenduDAO {
 	}
 
 	
+	
+	
 	public void deleteByNomArticle(String nomArticle) {
 
 		try {
@@ -109,6 +112,28 @@ public class ArticleVenduDAO {
 		*/
 		
 		return articleVendu;
+	}
+	
+	
+	public List<ArticleVendu> getByNoUtilisateur (int noUtilisateur) 
+	{
+		List<ArticleVendu> articlesVendus= new ArrayList<>();
+		try {
+			Connection con = ConnexionDAO.connectionBDD();
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Articles_Vendus where no_vendeur=?");
+			pstmt.setInt(1,noUtilisateur);
+			ResultSet res = pstmt.executeQuery();
+			while (res.next()) 
+			{ 
+				articlesVendus.add(articleFromRs (res));
+				
+			}
+			con.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return articlesVendus;
 	}
 	
 	
