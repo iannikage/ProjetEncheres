@@ -1,6 +1,7 @@
 package fr.eni.ecole.encheres.dal;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,11 +33,11 @@ public class ArticleVenduDAO {
 	}
 	
 	
-	public void save(ArticleVendu articleVendu) {
+	public void save(ArticleVendu articleVendu) { 
 
 		try {
-			Connection con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("INSERT INTO ArticleVendu (no_article,nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, no_vendeur, no_vendeur) VALUES (?,?,?,?,?,?,?,?,?)");
+			Connection con = ConnexionDAO.connectionBDD();
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Articles_Vendus (no_article,nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, no_vendeur, no_categorie) VALUES (?,?,?,?,?,?,?,?,?)");
 			pstmt.setInt(1, articleVendu.getNoArticle());
 			pstmt.setString(2, articleVendu.getNomArticle());
 			pstmt.setString(3, articleVendu.getDescription());
@@ -44,14 +45,10 @@ public class ArticleVenduDAO {
 			pstmt.setDate(5, articleVendu.getDateFinEnchere());
 			pstmt.setInt(6, articleVendu.getPrixInitial());
 			pstmt.setInt(7, articleVendu.getPrixVente());
-			
-			/* //sql 
-			pstmt.setInt(8, articleVendu.getNoVendeur());
-			pstmt.setString(9, articleVendu.getNoCategorie());
-			// classe Java ArticleVendu
-			pstmt.setInt(10, articleVendu.getCategorieArticle());
-			pstmt.setString(11, articleVendu.getLieuRetrait());
-			*/
+			pstmt.setInt(8, articleVendu.getVendeur().getNoUtilisateur());
+			pstmt.setInt(9, articleVendu.getCategorieArticle().getNoCategorie());
+		
+		
 			
 			pstmt.executeUpdate();
 
@@ -63,13 +60,12 @@ public class ArticleVenduDAO {
 	}
 
 	
-	public void deleteByNomArticle(int nomArticle) {
+	public void deleteByNomArticle(String nomArticle) {
 
 		try {
-			Connection con = connectionBDD();
-
-			PreparedStatement pstmt = con.prepareStatement("DELETE FROM ArticlesVendus WHERE nom_article=?");
-			pstmt.setInt(1, nomArticle);
+			Connection con = ConnexionDAO.connectionBDD();
+			PreparedStatement pstmt = con.prepareStatement("DELETE FROM Articles_Vendus WHERE nom_article=?");
+			pstmt.setString(1, nomArticle);
 			pstmt.executeUpdate();
 
 			con.close();
@@ -83,9 +79,9 @@ public class ArticleVenduDAO {
 	public void deleteByNoArticle(int noArticle) {
 
 		try {
-			Connection con = connectionBDD();
+			Connection con = ConnexionDAO.connectionBDD();
 
-			PreparedStatement pstmt = con.prepareStatement("DELETE FROM ArticlesVendus WHERE no_article=?");
+			PreparedStatement pstmt = con.prepareStatement("DELETE FROM Articles_Vendus WHERE no_article=?");
 			pstmt.setInt(1, noArticle);
 			pstmt.executeUpdate();
 
@@ -108,16 +104,13 @@ public class ArticleVenduDAO {
 		articleVendu.setPrixInitial(res.getInt("prix_initial"));
 		articleVendu.setPrixVente(res.getInt("prix_vente"));
 		
+		/*articleVendu.setVendeur.setNoUtilisitateur(res.getInt("no_vendeur"));
+		articleVendu.setCategorieArticle(res.getInt("no_categorie"));
+		*/
+		
 		return articleVendu;
 	}
 	
-	/* ajouter? 
-	pstmt.setInt(8, articleVendu.getNoVendeur());
-	pstmt.setString(9, articleVendu.getNoCategorie());
-	// classe Java ArticleVendu
-	pstmt.setInt(10, articleVendu.getCategorieArticle());
-	pstmt.setString(11, articleVendu.getLieuRetrait());
-	*/
 	
 	
 	
@@ -125,8 +118,8 @@ public class ArticleVenduDAO {
 	{
 		ArticleVendu articleVendu=null;
 		try {
-			Connection con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM ArticlesVendus where no_article=?");
+			Connection con = ConnexionDAO.connectionBDD();
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Articles_Vendus where no_article=?");
 			pstmt.setInt(1,noArticle);
 			ResultSet res = pstmt.executeQuery();
 			if(res.next()) 
@@ -147,8 +140,8 @@ public class ArticleVenduDAO {
 	{
 		ArticleVendu articleVendu=null;
 		try {
-			Connection con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM ArticlesVendus where nom_article=?");
+			Connection con = ConnexionDAO.connectionBDD();
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Articles_Vendus where nom_article=?");
 			pstmt.setString(1,nomArticle);
 			ResultSet res = pstmt.executeQuery();
 			if(res.next()) 
@@ -164,59 +157,12 @@ public class ArticleVenduDAO {
 		return articleVendu;
 	}
 	
-
-
-	private Connection connectionBDD() {
-		return null;
-	}
 	
 }
 	
-	
-	/* public ArticleVendu findByDateDebutEnchere -> besoin ou pas?   car dans BLL on aura une recherche ventes en cours
-	 * et public ArticleVendu findByCategorie ? possible ou pas
-	 * Besoin d'une connection par classeDAO? si pas besoin y a t-il besoin de spécifier quelquechose? 
-	 * Public ArticleVendu findByVendeur? 
-	 */
-	
-	
 
 	
 	
 	
 	
-	/* private Connection connectionBDD() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private Connection connectionBDD() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	//Sélectionner un article par son noArticle
-	public ArticleVendu selectByNoArticle(int noArticle) throws DALException;
 	
-	
-	//Sélectionner tous les articles 
-	public List<ArticleVendu> selectAll() throws DALException;
-	
-	//Modifier les attributs d'un article connu en BD
-	public void update(ArticleVendu data) throws DALException;
-	
-	//Insérer un nouvel article
-	public void insert(ArticleVendu data) throws DALException;
-	
-	//Supprimer un article par noArticle
-	public void delete(int noArticle) throws DALException;
-	
-	//Sélectionner les articles par categorieArticle
-	public List<ArticleVendu> selectByCategorieArticle(int categorieArticle) throws DALException;
-	
-	//Sélectionner les articles par mot clé
-	//On recherche le mot clé dans la désignation et la catégorie
-	public List<ArticleVendu> selectByMotCle(String motCle) throws DALException;
-
-}
-*/

@@ -9,6 +9,7 @@ import java.util.List;
 
 import fr.eni.ecole.encheres.bo.ArticleVendu;
 import fr.eni.ecole.encheres.bo.Categorie;
+import fr.eni.ecole.encheres.bo.Enchere;
 import fr.eni.ecole.encheres.bo.Utilisateur;
 
 public class CategorieDAO {
@@ -24,47 +25,36 @@ public class CategorieDAO {
 		}
 		return instance;
 	}
-
 	
-	public List<Categorie> listerLesCategories() {
-		return null;
-	}
-		List<Categorie> listeCategories = new ArrayList<Categorie>()
+	public List<Categorie> findAll(String field, String sens) {
 
-        
-	/*public  Categorie findByNoCategorie(int noCategorie) {
-		Categorie categorieArticle=null;
+		List<Categorie> categories = new ArrayList<Categorie>();
+
 		try {
-			Connection con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Categories where no_categorie=?");
-			pstmt.setInt(1,noCategorie);
+			PreparedStatement pstmt;
+			Connection con = ConnexionDAO.connectionBDD();
+			
+				 pstmt= con.prepareStatement("SELECT DISTINCT no_categorie, libelle FROM Categories ");
+
+			
 			ResultSet res = pstmt.executeQuery();
-			if(res.next()) 
-			{
-				
-				categorieArticle = new Categorie();
-				categorieArticle.setNoCategorie(res.getInt("noCategorie"));
-				return categorieArticle;
-				
+
+			while (res.next()) {
+				Categorie categorie = new Categorie();
+				categorie.setNoCategorie(res.getInt("no_categorie"));
+				categorie.setLibelle(res.getString("libelle"));
+						
+				categories.add(categorie);
+
 			}
 			con.close();
-		}
-			catch (SQLException e) {
-				e.printStackTrace();
-			} 
-			return categorieArticle;
-		}
-		
-		
-	
-	private Connection connectionBDD() {
-		// TODO Auto-generated method stub
-		return null
-*/
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return categories;
 	}
+	
 }
 
-	private Connection connectionBDD() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    
+	
