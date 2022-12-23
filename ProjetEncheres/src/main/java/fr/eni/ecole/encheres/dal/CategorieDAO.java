@@ -1,16 +1,15 @@
 package fr.eni.ecole.encheres.dal;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.ecole.encheres.bo.ArticleVendu;
 import fr.eni.ecole.encheres.bo.Categorie;
-import fr.eni.ecole.encheres.bo.Enchere;
-import fr.eni.ecole.encheres.bo.Utilisateur;
+
 
 public class CategorieDAO {
 	private static CategorieDAO instance = null;
@@ -26,7 +25,7 @@ public class CategorieDAO {
 		return instance;
 	}
 	
-	public List<Categorie> findAll(String field, String sens) {
+	public List<Categorie> findAll() {
 
 		List<Categorie> categories = new ArrayList<Categorie>();
 
@@ -34,7 +33,7 @@ public class CategorieDAO {
 			PreparedStatement pstmt;
 			Connection con = ConnexionDAO.connectionBDD();
 			
-				 pstmt= con.prepareStatement("SELECT DISTINCT no_categorie, libelle FROM Categories ");
+				 pstmt= con.prepareStatement("SELECT * FROM Categories ");
 
 			
 			ResultSet res = pstmt.executeQuery();

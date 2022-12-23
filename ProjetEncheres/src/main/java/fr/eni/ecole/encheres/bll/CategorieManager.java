@@ -22,7 +22,7 @@ public class CategorieManager {
 		return instance;
 	}
 	
-	public List<Categorie> findAll(String field, String sens) {
-		return categorieDAO.findAll(field, sens);
+	public List<Categorie> findAll() {
+		return categorieDAO.findAll();
 	}
 }

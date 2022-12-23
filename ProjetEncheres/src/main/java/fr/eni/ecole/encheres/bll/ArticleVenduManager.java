@@ -1,12 +1,15 @@
 package fr.eni.ecole.encheres.bll;
 
 import java.util.List;
+
 import fr.eni.ecole.encheres.bo.ArticleVendu;
+import fr.eni.ecole.encheres.bo.Categorie;
 import fr.eni.ecole.encheres.bo.Enchere;
 import fr.eni.ecole.encheres.bo.Utilisateur;
 import fr.eni.ecole.encheres.dal.ArticleVenduDAO;
 import fr.eni.ecole.encheres.dal.EnchereDAO;
 import fr.eni.ecole.encheres.dal.UtilisateurDAO;
+import fr.eni.ecole.encheres.dal.CategorieDAO;
 
 public class ArticleVenduManager {
 
@@ -50,6 +53,10 @@ public class ArticleVenduManager {
 	
 	public List<ArticleVendu> getByNoUtilisateur (Utilisateur vendeur) {
 		return articleVenduDAO.getByNoUtilisateur(vendeur.getNoUtilisateur());
+	}
+	
+	public List<Categorie> findAll (){
+		return CategorieDAO.getInstance().findAll();
 	}
 	
 	
