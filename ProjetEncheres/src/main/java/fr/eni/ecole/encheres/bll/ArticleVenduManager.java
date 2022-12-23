@@ -48,12 +48,10 @@ public class ArticleVenduManager {
 	
 	//afficher liste articles vendus par utilisateur/vendeur :
 	
-	public ArticleVendu getByNoUtilisateur (Utilisateur vendeur) {
-		return UtilisateurDAO.getByNoUtilisateur(noUtilisateur);
+	public List<ArticleVendu> getByNoUtilisateur (Utilisateur vendeur) {
+		return articleVenduDAO.getByNoUtilisateur(vendeur.getNoUtilisateur());
 	}
 	
-	public void afficher() {
-		System.out.println();
-	}
+	
 
 }
