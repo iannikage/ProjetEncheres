@@ -47,16 +47,16 @@ public class ArticleVenduManager {
 		return articleVenduDAO.findByNomArticle(nomArticle);
 	}
 	
-	//liens avec utilisateur/vendeur, liste encheres, categorieArticle, lieuRetrait
-	
-	//afficher liste articles vendus par utilisateur/vendeur :
-	
 	public List<ArticleVendu> getByNoUtilisateur (Utilisateur vendeur) {
 		return articleVenduDAO.getByNoUtilisateur(vendeur.getNoUtilisateur());
 	}
 	
-	public List<Categorie> findAll (){
+	public List<Categorie> findAl1(){
 		return CategorieDAO.getInstance().findAll();
+	}
+	
+	public List<Enchere> findAll(){
+		return EnchereDAO.getInstance().findAll();
 	}
 	
 	
