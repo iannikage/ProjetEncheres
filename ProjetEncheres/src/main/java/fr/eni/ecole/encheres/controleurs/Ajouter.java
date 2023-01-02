@@ -44,5 +44,5 @@ public class Ajouter extends HttpServlet {
 		request.getSession().setAttribute("Userconnected",u);
 		response.sendRedirect("P4AccueilCo.jsp");
 		}
-
+//test
 }
