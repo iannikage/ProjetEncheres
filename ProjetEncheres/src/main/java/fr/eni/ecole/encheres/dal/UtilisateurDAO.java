@@ -35,19 +35,18 @@ public class UtilisateurDAO {
 
 		try {
 			Connection con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Utilisateurs (no_utilisateur,pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
-			pstmt.setInt(1, utilisateur.getNoUtilisateur());
-			pstmt.setString(2, utilisateur.getPseudo());
-			pstmt.setString(3, utilisateur.getNom());
-			pstmt.setString(4, utilisateur.getPrenom());
-			pstmt.setString(5, utilisateur.getEmail());
-			pstmt.setInt(6, utilisateur.getTelephone());
-			pstmt.setString(7, utilisateur.getRue());
-			pstmt.setInt(8, utilisateur.getCodePostal());
-			pstmt.setString(9, utilisateur.getVille());
-			pstmt.setString(10, utilisateur.getMotDePasse());
-			pstmt.setInt(11, utilisateur.getCredit());
-			pstmt.setInt(12, utilisateur.getAdministrateur());
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+			pstmt.setString(1, utilisateur.getPseudo());
+			pstmt.setString(2, utilisateur.getNom());
+			pstmt.setString(3, utilisateur.getPrenom());
+			pstmt.setString(4, utilisateur.getEmail());
+			pstmt.setInt(5, utilisateur.getTelephone());
+			pstmt.setString(6, utilisateur.getRue());
+			pstmt.setInt(7, utilisateur.getCodePostal());
+			pstmt.setString(8, utilisateur.getVille());
+			pstmt.setString(9, utilisateur.getMotDePasse());
+			pstmt.setInt(10, utilisateur.getCredit());
+			pstmt.setInt(11, utilisateur.getAdministrateur());
 			//securiser mdp avec hashPwd
 		
 			pstmt.executeUpdate();
