@@ -52,7 +52,7 @@
         <div>
             <label for="mPrix">Ma Proposition :</label>
             <input class="input" type="number" name="mPrix" id="mPrix" 
-            step="1" max= "10000" min="0" required>
+            step="1" max= $(//credit max de l'utilisateur) min=$ required>
         </div>
 
       <div>

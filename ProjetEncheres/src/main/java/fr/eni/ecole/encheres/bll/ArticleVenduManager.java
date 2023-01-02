@@ -2,6 +2,7 @@ package fr.eni.ecole.encheres.bll;
 
 import java.util.List;
 
+
 import fr.eni.ecole.encheres.bo.ArticleVendu;
 import fr.eni.ecole.encheres.bo.Categorie;
 import fr.eni.ecole.encheres.bo.Enchere;
@@ -47,10 +48,6 @@ public class ArticleVenduManager {
 		return articleVenduDAO.findByNomArticle(nomArticle);
 	}
 	
-	public List<ArticleVendu> getByNoUtilisateur (Utilisateur vendeur) {
-		return articleVenduDAO.getByNoUtilisateur(vendeur.getNoUtilisateur());
-	}
-	
 	public List<Categorie> findAl1(){
 		return CategorieDAO.getInstance().findAll();
 	}
@@ -59,6 +56,9 @@ public class ArticleVenduManager {
 		return EnchereDAO.getInstance().findAll();
 	}
 	
+	public List<ArticleVendu> getByUtilisateur (Utilisateur vendeur, boolean enCours, boolean nonDebutees, boolean terminees){
+		return ArticleVenduDAO.getInstance().getByNoUtilisateur(vendeur.getNoUtilisateur(), enCours, nonDebutees, terminees);
+}
 	
 
 }

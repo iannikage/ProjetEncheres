@@ -2,6 +2,8 @@ package fr.eni.ecole.encheres.dal;
 
 import java.sql.Connection;
 
+
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -107,21 +109,35 @@ public class ArticleVenduDAO {
 		articleVendu.setPrixInitial(res.getInt("prix_initial"));
 		articleVendu.setPrixVente(res.getInt("prix_vente"));
 		
-		/*articleVendu.setVendeur.setNoUtilisitateur(res.getInt("no_vendeur"));
-		articleVendu.setCategorieArticle(res.getInt("no_categorie"));
-		*/
 		
 		return articleVendu;
 	}
 	
 	
-	public List<ArticleVendu> getByNoUtilisateur (int noUtilisateur) 
+	public List<ArticleVendu> getByNoUtilisateur (int noUtilisateur, boolean enCours, boolean nonDebutees, boolean terminees) 
 	{
 		List<ArticleVendu> articlesVendus= new ArrayList<>();
+		String request;
+		Connection con = ConnexionDAO.connectionBDD();
+		if (enCours) {
+			request = "SELECT * from ARTICLES_VENDUS where date_debut_enchere < GETDATE() and date_fin_enchere > GETDATE() and where no_vendeur = ?";
+			PreparedStatement pstmt = con.prepareStatement(request);
+			pstmt.setInt(1, noUtilisateur);
+			//ResultSet res = pstmt.executeQuery();
+		}
+		if (nonDebutees) {
+			request = "SELECT * from ARTICLES_VENDUS where date_debut_enchere > GETDATE() and where no_vendeur = ?";
+					PreparedStatement pstmt = con.prepareStatement(request);
+					pstmt.setInt(1,noUtilisateur);
+					ResultSet res = pstmt.executeQuery();
+		}
+		if (terminees) {
+			request = "SELECT * from ARTICLES_VENDUS where date_fin_enchere > GETDATE() and where no_vendeur = ?";
+					PreparedStatement pstmt = con.prepareStatement(request);
+					pstmt.setInt(1,noUtilisateur);
+					ResultSet res = pstmt.executeQuery();
+		}
 		try {
-			Connection con = ConnexionDAO.connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Articles_Vendus where no_vendeur=?");
-			pstmt.setInt(1,noUtilisateur);
 			ResultSet res = pstmt.executeQuery();
 			while (res.next()) 
 			{ 
@@ -135,8 +151,6 @@ public class ArticleVenduDAO {
 		} 
 		return articlesVendus;
 	}
-	
-	
 	
 	
 	public ArticleVendu findByNoArticle(int noArticle) 
@@ -181,6 +195,7 @@ public class ArticleVenduDAO {
 		} 
 		return articleVendu;
 	}
+	
 	
 	
 }

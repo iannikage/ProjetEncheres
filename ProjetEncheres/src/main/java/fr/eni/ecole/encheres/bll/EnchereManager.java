@@ -3,6 +3,7 @@ package fr.eni.ecole.encheres.bll;
 import java.util.List;
 
 import fr.eni.ecole.encheres.bo.Enchere;
+import fr.eni.ecole.encheres.bo.Utilisateur;
 import fr.eni.ecole.encheres.dal.EnchereDAO;
 
 public class EnchereManager {
@@ -25,8 +26,12 @@ public class EnchereManager {
 		enchereDAO.save(enchere);
 	}
 	
-	public List<Enchere> findAll(String field, String sens) {
-		return enchereDAO.findAll(field, sens);
+	public List<Enchere> findAll() { //Suppr de field/sens
+		return enchereDAO.findAll();
+	}
+		
+	public List<Enchere> getByUtilisateur (Utilisateur encherisseur, boolean ouvertes, boolean enCours, boolean remportees){
+			return EnchereDAO.getInstance().getByNoUtilisateur(encherisseur.getNoUtilisateur(), ouvertes, enCours, remportees);
 	}
 	
 }

@@ -2,15 +2,15 @@ package fr.eni.ecole.encheres.dal;
 
 import java.sql.Connection;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import fr.eni.ecole.encheres.bo.ArticleVendu;
 import fr.eni.ecole.encheres.bo.Enchere;
-import fr.eni.ecole.encheres.bo.Utilisateur;
 
 public class EnchereDAO {
 	
@@ -48,22 +48,15 @@ public class EnchereDAO {
 		} 
 	}
 	
-	public List<Enchere> findAll(String field, String sens) {
+	public List<Enchere> findAll() { //suppr field/sens
 
 		List<Enchere> encheres = new ArrayList<Enchere>();
 
 		try {
 			PreparedStatement pstmt;
 			Connection con = ConnexionDAO.connectionBDD();
-			if(field!=null && sens!=null)
-			{
-				 pstmt= con.prepareStatement("SELECT * FROM Enchere order by " + field + " " + sens);
-			}
-			else
-			{
-				 pstmt= con.prepareStatement("SELECT * FROM Enchere ");
-			}
-
+				pstmt= con.prepareStatement("SELECT * FROM Enchere ");
+		
 			
 			ResultSet res = pstmt.executeQuery();
 
@@ -72,10 +65,7 @@ public class EnchereDAO {
 				enchere.setNoEnchere(res.getInt("no_enchere"));
 				enchere.setDateEnchere(res.getDate("date_enchere"));
 				enchere.setMontantEnchere(res.getInt("montant_enchere"));
-				/*
-				enchere.setNoArticle(res.getInt("no_article"));
-				utilisateur.setNoEncherisseur(res.getString("no_encherisseur"));
-				*/
+	
 							
 				encheres.add(enchere);
 
@@ -87,7 +77,53 @@ public class EnchereDAO {
 		return encheres;
 	}
 	
-	//mettre un finbyDatedébut ?
+	private Enchere enchereFromRs (ResultSet res) throws SQLException {
+		Enchere enchere;
+		enchere = new Enchere();
+		enchere.setNoEnchere(res.getInt("no_enchere"));
+		enchere.setDateEnchere(res.getDate("date_enchere"));
+		enchere.setMontantEnchere(res.getInt("montant_enchere"));
 	
+		
+		return enchere;
+	}
 	
+	public List<Enchere> getByNoUtilisateur (int noUtilisateur, boolean ouvertes, boolean enCours, boolean remportees) 
+	{
+		List<Enchere> encheresEmises= new ArrayList<>();
+		String request;
+		Connection con = ConnexionDAO.connectionBDD();
+		if (ouvertes) {
+			//request = "SELECT * from ARTICLES_VENDUS where date_debut_enchere < GETDATE() and date_fin_enchere > GETDATE()";
+			PreparedStatement pstmt = con.prepareStatement(request);
+			//ResultSet res = pstmt.executeQuery();
+		}
+		if (enCours) {
+			request = "SELECT * from ARTICLES_VENDUS where date_debut_enchere < GETDATE() and date_fin_enchere < GETDATE() and where no_encherisseur = ?";
+					PreparedStatement pstmt = con.prepareStatement(request);
+					pstmt.setInt(1,noUtilisateur);
+					ResultSet res = pstmt.executeQuery();
+		}
+		if (remportees) {
+			request = "SELECT * from ARTICLES_VENDUS where date_fin_enchere > GETDATE() and where no_encherisseur = ? //and where prix_vente = ?";
+					PreparedStatement pstmt = con.prepareStatement(request);
+					pstmt.setInt(1,noUtilisateur);
+					//pstmt.setInt(2,noEnchere);
+					ResultSet res = pstmt.executeQuery();
+		}
+		
+		try {
+			ResultSet res = pstmt.executeQuery();
+			while (res.next()) 
+			{ 
+				encheresEmises.add(enchereFromRs (res));
+
+			}
+			con.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return encheresEmises;
+	}
 }
