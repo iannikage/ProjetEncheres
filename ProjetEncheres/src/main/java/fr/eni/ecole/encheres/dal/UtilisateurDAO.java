@@ -35,7 +35,7 @@ public class UtilisateurDAO {
 
 		try {
 			Connection con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, utilisateur.getPseudo());
 			pstmt.setString(2, utilisateur.getNom());
 			pstmt.setString(3, utilisateur.getPrenom());
@@ -50,6 +50,9 @@ public class UtilisateurDAO {
 			//securiser mdp avec hashPwd
 		
 			pstmt.executeUpdate();
+			ResultSet cles=pstmt.getGeneratedKeys();
+			cles.next();
+			utilisateur.setNoUtilisateur(cles.getInt(1));
 
 			con.close();
 

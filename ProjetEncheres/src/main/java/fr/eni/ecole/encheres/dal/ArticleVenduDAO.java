@@ -40,7 +40,7 @@ public class ArticleVenduDAO {
 
 		try {
 			Connection con = ConnexionDAO.connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Articles_Vendus (no_article,nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, no_vendeur, no_categorie) VALUES (?,?,?,?,?,?,?,?,?)");
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Articles_Vendus (nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, no_vendeur, no_categorie) VALUES (?,?,?,?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, articleVendu.getNoArticle());
 			pstmt.setString(2, articleVendu.getNomArticle());
 			pstmt.setString(3, articleVendu.getDescription());
@@ -54,6 +54,9 @@ public class ArticleVenduDAO {
 		
 			
 			pstmt.executeUpdate();
+			ResultSet cles=pstmt.getGeneratedKeys();
+			cles.next();
+			articleVendu.setNoArticle(cles.getInt(1));
 
 			con.close();
 
@@ -114,28 +117,29 @@ public class ArticleVenduDAO {
 	}
 	
 	
-	public List<ArticleVendu> getByNoUtilisateur (int noUtilisateur, boolean enCours, boolean nonDebutees, boolean terminees) 
+	public List<ArticleVendu> getByNoUtilisateur (int noUtilisateur, boolean enCours, boolean nonDebutees, boolean terminees) throws SQLException 
 	{
 		List<ArticleVendu> articlesVendus= new ArrayList<>();
 		String request;
+		PreparedStatement pstmt=null;
 		Connection con = ConnexionDAO.connectionBDD();
 		if (enCours) {
 			request = "SELECT * from ARTICLES_VENDUS where date_debut_enchere < GETDATE() and date_fin_enchere > GETDATE() and where no_vendeur = ?";
-			PreparedStatement pstmt = con.prepareStatement(request);
+			pstmt = con.prepareStatement(request);
 			pstmt.setInt(1, noUtilisateur);
-			//ResultSet res = pstmt.executeQuery();
+			
 		}
 		if (nonDebutees) {
 			request = "SELECT * from ARTICLES_VENDUS where date_debut_enchere > GETDATE() and where no_vendeur = ?";
-					PreparedStatement pstmt = con.prepareStatement(request);
+					pstmt = con.prepareStatement(request);
 					pstmt.setInt(1,noUtilisateur);
-					ResultSet res = pstmt.executeQuery();
+					
 		}
 		if (terminees) {
 			request = "SELECT * from ARTICLES_VENDUS where date_fin_enchere > GETDATE() and where no_vendeur = ?";
-					PreparedStatement pstmt = con.prepareStatement(request);
+					pstmt = con.prepareStatement(request);
 					pstmt.setInt(1,noUtilisateur);
-					ResultSet res = pstmt.executeQuery();
+					
 		}
 		try {
 			ResultSet res = pstmt.executeQuery();

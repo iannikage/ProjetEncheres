@@ -1,15 +1,14 @@
 package fr.eni.ecole.encheres.dal;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.ecole.encheres.bo.ArticleVendu;
 import fr.eni.ecole.encheres.bo.Retrait;
-import fr.eni.ecole.encheres.bo.Utilisateur;
 
 public class RetraitDAO {
 
@@ -30,13 +29,17 @@ public class RetraitDAO {
 
 		try {
 			Connection con = ConnexionDAO.connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Retraits (rue,code_postal,ville) VALUES (?,?,?)");
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Retraits (rue,code_postal,ville) VALUES (?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, retrait.getRue());
 			pstmt.setString(2, retrait.getCodePostal());
 			pstmt.setString(3, retrait.getVille());
 			
 		
 			pstmt.executeUpdate();
+			ResultSet cles=pstmt.getGeneratedKeys();
+			cles.next();
+			retrait.set(cles.getInt(1));
+
 
 			con.close();
 
@@ -45,23 +48,16 @@ public class RetraitDAO {
 		} 
 	}
 	
-	public List<Retrait> findAll(String field, String sens) {
+	public List<Retrait> findAll() {
 
 		List<Retrait> retraits = new ArrayList<Retrait>();
 
 		try {
 			PreparedStatement pstmt;
 			Connection con = ConnexionDAO.connectionBDD();
-			if(field!=null && sens!=null)
-			{
-				 pstmt= con.prepareStatement("SELECT * FROM Retraits order by " + field + " " + sens);
-			}
-			else
-			{
-				 pstmt= con.prepareStatement("SELECT * FROM Retraits ");
-			}
-
 			
+				 pstmt= con.prepareStatement("SELECT * FROM Retraits ");
+		
 			ResultSet res = pstmt.executeQuery();
 
 			while (res.next()) {

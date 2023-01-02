@@ -31,7 +31,7 @@ public class EnchereDAO {
 
 		try {
 			Connection con = ConnexionDAO.connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Enchere (no_enchere,date_enchere,montant_enchere,no_encherisseur,no_article) VALUES (?,?,?,?,?)");
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Enchere (date_enchere,montant_enchere,no_encherisseur,no_article) VALUES (?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, enchere.getNoEnchere());
 			pstmt.setDate(2, enchere.getDateEnchere());
 			pstmt.setInt(3, enchere.getMontantEnchere());
@@ -40,6 +40,10 @@ public class EnchereDAO {
 			
 
 			pstmt.executeUpdate();
+			ResultSet cles=pstmt.getGeneratedKeys();
+			cles.next();
+			enchere.setNoEnchere(cles.getInt(1));
+
 
 			con.close();
 
@@ -48,7 +52,7 @@ public class EnchereDAO {
 		} 
 	}
 	
-	public List<Enchere> findAll() { //suppr field/sens
+	public List<Enchere> findAll() {
 
 		List<Enchere> encheres = new ArrayList<Enchere>();
 
@@ -88,28 +92,28 @@ public class EnchereDAO {
 		return enchere;
 	}
 	
-	public List<Enchere> getByNoUtilisateur (int noUtilisateur, boolean ouvertes, boolean enCours, boolean remportees) 
+	public List<Enchere> getByNoUtilisateur (int noUtilisateur, boolean ouvertes, boolean enCours, boolean remportees) throws SQLException 
 	{
 		List<Enchere> encheresEmises= new ArrayList<>();
 		String request;
+		PreparedStatement pstmt=null;
 		Connection con = ConnexionDAO.connectionBDD();
 		if (ouvertes) {
-			//request = "SELECT * from ARTICLES_VENDUS where date_debut_enchere < GETDATE() and date_fin_enchere > GETDATE()";
-			PreparedStatement pstmt = con.prepareStatement(request);
-			//ResultSet res = pstmt.executeQuery();
+			request = "SELECT * from ARTICLES_VENDUS where date_debut_enchere < GETDATE() and date_fin_enchere > GETDATE()";
+			pstmt = con.prepareStatement(request);
+			
 		}
 		if (enCours) {
 			request = "SELECT * from ARTICLES_VENDUS where date_debut_enchere < GETDATE() and date_fin_enchere < GETDATE() and where no_encherisseur = ?";
-					PreparedStatement pstmt = con.prepareStatement(request);
-					pstmt.setInt(1,noUtilisateur);
-					ResultSet res = pstmt.executeQuery();
+			pstmt = con.prepareStatement(request);
+			pstmt.setInt(1,noUtilisateur);
+					
 		}
 		if (remportees) {
 			request = "SELECT * from ARTICLES_VENDUS where date_fin_enchere > GETDATE() and where no_encherisseur = ? //and where prix_vente = ?";
-					PreparedStatement pstmt = con.prepareStatement(request);
-					pstmt.setInt(1,noUtilisateur);
-					//pstmt.setInt(2,noEnchere);
-					ResultSet res = pstmt.executeQuery();
+			pstmt = con.prepareStatement(request);
+			pstmt.setInt(1,noUtilisateur);
+			//pstmt.setInt(2,noEnchere);
 		}
 		
 		try {
