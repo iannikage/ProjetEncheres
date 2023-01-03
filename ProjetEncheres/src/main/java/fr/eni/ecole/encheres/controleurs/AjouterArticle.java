@@ -49,5 +49,5 @@ public class AjouterArticle extends HttpServlet {
 		request.getSession().setAttribute("Userconnected",a);
 		response.sendRedirect("P4P5AccueilCo.jsp");
 		}
-
+//vu
 }

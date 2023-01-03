@@ -222,7 +222,7 @@ public class ArticleVenduDAO {
 		return articleVendu;
 	}
 	
-	
+	//vu
 	
 }
 	

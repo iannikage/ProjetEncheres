@@ -156,5 +156,5 @@ public class ArticleVendu {
 					+ ", encheresEmises=" + encheresEmises + "]";
 		}
 
-	   
+	//vu   
 }

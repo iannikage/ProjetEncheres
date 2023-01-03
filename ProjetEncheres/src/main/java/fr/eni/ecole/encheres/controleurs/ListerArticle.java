@@ -36,5 +36,5 @@ public class ListerArticle extends HttpServlet {
 		getServletContext().getRequestDispatcher("/P1AccueilDeco.jsp").forward(request,  response);
 	}
 
-	
+//vu	
 }
