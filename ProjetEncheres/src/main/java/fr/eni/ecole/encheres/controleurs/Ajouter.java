@@ -21,7 +21,7 @@ public class Ajouter extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		getServletContext().getRequestDispatcher("ProjetEncheres/P3AjouterCreerProfil.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/ProjetEncheres/P3AjouterCreerProfil.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,11 +38,11 @@ public class Ajouter extends HttpServlet {
 		ville=request.getParameter("ville");
 		password=request.getParameter("password");
 		
-		u=new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codepostal, ville, password, 100, 0);
+		u=new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codepostal, ville, password, 0, 0);
 		UtilisateurManager.getInstance().save(u);
 		
 		request.getSession().setAttribute("Userconnected",u);
-		response.sendRedirect("P4AccueilCo.jsp");
+		response.sendRedirect("P4P5AccueilCo.jsp");
 		}
-//test
+
 }

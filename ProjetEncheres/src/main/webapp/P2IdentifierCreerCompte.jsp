@@ -29,7 +29,9 @@
     
         <a href="" id="Mdpoublie"> Mot de passe oublié </a> <br>
 
-        <input type="button" value="Créer un compte" id="Creeruncompte">
+        !--<input type="button" value="Créer un compte" id="Creeruncompte">--!
+        <a href="P3AjouterCreerProfil.jsp">Créer un compte</a>
+        
     
     </form>  
 
