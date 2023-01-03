@@ -4,6 +4,8 @@ import java.sql.Connection;
 
 
 
+
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,11 +43,10 @@ public class ArticleVenduDAO {
 		try {
 			Connection con = ConnexionDAO.connectionBDD();
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Articles_Vendus (nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, no_vendeur, no_categorie) VALUES (?,?,?,?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
-			pstmt.setInt(1, articleVendu.getNoArticle());
 			pstmt.setString(2, articleVendu.getNomArticle());
 			pstmt.setString(3, articleVendu.getDescription());
-			pstmt.setDate(4, articleVendu.getDateDebutEnchere());
-			pstmt.setDate(5, articleVendu.getDateFinEnchere());
+			pstmt.setDate(4, new Date(articleVendu.getDateDebutEnchere().getTime()));
+			pstmt.setDate(5, new Date(articleVendu.getDateFinEnchere().getTime()));
 			pstmt.setInt(6, articleVendu.getPrixInitial());
 			pstmt.setInt(7, articleVendu.getPrixVente());
 			pstmt.setInt(8, articleVendu.getVendeur().getNoUtilisateur());
@@ -168,6 +169,27 @@ public class ArticleVenduDAO {
 			if(res.next()) 
 			{ 
 				articleVendu = articleFromRs (res);
+				
+			}
+			con.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return articleVendu;
+	}
+	
+	public List<ArticleVendu> findByNoCategorie (int noCategorie) 
+	{
+		List<ArticleVendu> articleVendu= new ArrayList<>();
+		try {
+			Connection con = ConnexionDAO.connectionBDD();
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Articles_Vendus where no_categorie=?");
+			pstmt.setInt(1,noCategorie);
+			ResultSet res = pstmt.executeQuery();
+			if(res.next()) 
+			{ 
+				articleVendu.add (articleFromRs (res));
 				
 			}
 			con.close();

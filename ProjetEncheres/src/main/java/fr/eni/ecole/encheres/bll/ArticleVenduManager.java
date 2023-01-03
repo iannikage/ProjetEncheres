@@ -1,6 +1,9 @@
 package fr.eni.ecole.encheres.bll;
 
+import java.sql.SQLException;
 import java.util.List;
+
+
 
 
 import fr.eni.ecole.encheres.bo.ArticleVendu;
@@ -48,17 +51,21 @@ public class ArticleVenduManager {
 		return articleVenduDAO.findByNomArticle(nomArticle);
 	}
 	
-	public List<Categorie> findAl1(){
+	public List<ArticleVendu> findByNoCategorie(int noCategorie) {
+		return articleVenduDAO.findByNoCategorie(noCategorie);
+	}
+	
+	public List<Categorie> findAllCategorie(){
 		return CategorieDAO.getInstance().findAll();
 	}
 	
-	public List<Enchere> findAll(){
+	public List<Enchere> findAllEnchere(){
 		return EnchereDAO.getInstance().findAll();
 	}
 	
-	public List<ArticleVendu> getByUtilisateur (Utilisateur vendeur, boolean enCours, boolean nonDebutees, boolean terminees){
+	public List<ArticleVendu> getByUtilisateur (Utilisateur vendeur, boolean enCours, boolean nonDebutees, boolean terminees) throws SQLException{
 		return ArticleVenduDAO.getInstance().getByNoUtilisateur(vendeur.getNoUtilisateur(), enCours, nonDebutees, terminees);
-}
+	}
 	
 
 }

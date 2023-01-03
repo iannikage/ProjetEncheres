@@ -1,6 +1,7 @@
 package fr.eni.ecole.encheres.bo;
 
-import java.sql.Date;
+import java.util.Date;
+
 import java.util.List;
 
 public class ArticleVendu {
@@ -10,8 +11,8 @@ public class ArticleVendu {
 	    private String description;
 	    private Date dateDebutEnchere;
 	    private Date dateFinEnchere;
-	    private String prixInitial;
-	    private String prixVente;
+	    private int prixInitial;
+	    private int prixVente;
 	    private Utilisateur vendeur;
 	    private List<Enchere> encheresEmises;
 	    private Categorie categorieArticle;
@@ -22,7 +23,7 @@ public class ArticleVendu {
 	    }
 
 		public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEnchere,
-				Date dateFinEnchere, String prixInitial, String prixVente, Utilisateur vendeur,
+				Date dateFinEnchere, int prixInitial, int prixVente, Utilisateur vendeur,
 				List<Enchere> encheresEmises, Categorie categorieArticle, Retrait lieuRetrait) {
 			super();
 			this.noArticle = noArticle;
@@ -38,7 +39,7 @@ public class ArticleVendu {
 			this.lieuRetrait = lieuRetrait;
 		}
 		public ArticleVendu(String nomArticle, String description, Date dateDebutEnchere,
-				Date dateFinEnchere, String prixInitial, String prixVente, Utilisateur vendeur,
+				Date dateFinEnchere, int prixInitial, int prixVente, Utilisateur vendeur,
 				List<Enchere> encheresEmises, Categorie categorieArticle, Retrait lieuRetrait) {
 			super();
 			this.nomArticle = nomArticle;
@@ -53,6 +54,11 @@ public class ArticleVendu {
 			this.lieuRetrait = lieuRetrait;
 		}
 		
+
+		public ArticleVendu(String nomArticle2, String description2, java.util.Date dateDebutEnchere2,
+				java.util.Date dateFinEnchere2, int prixInitial2, int prixVente2, Utilisateur utilisateur,
+				Object object, Object object2, Object object3) {
+		}
 
 		public int getNoArticle() {
 			return noArticle;
@@ -94,19 +100,19 @@ public class ArticleVendu {
 			this.dateFinEnchere = dateFinEnchere;
 		}
 
-		public String getPrixInitial() {
+		public int getPrixInitial() {
 			return prixInitial;
 		}
 
-		public void setPrixInitial(String prixInitial) {
+		public void setPrixInitial(int prixInitial) {
 			this.prixInitial = prixInitial;
 		}
 
-		public String getPrixVente() {
+		public int getPrixVente() {
 			return prixVente;
 		}
 
-		public void setPrixVente(String prixVente) {
+		public void setPrixVente(int prixVente) {
 			this.prixVente = prixVente;
 		}
 

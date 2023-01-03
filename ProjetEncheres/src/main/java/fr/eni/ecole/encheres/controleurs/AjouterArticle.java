@@ -2,6 +2,7 @@ package fr.eni.ecole.encheres.controleurs;
 
 import java.io.IOException;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,15 +34,16 @@ public class AjouterArticle extends HttpServlet {
 		ArticleVendu a;
 		nomArticle=request.getParameter("nomArticle");
 		description=request.getParameter("description");
-		dateDebutEnchere=Date.parseDate(request.getParameter("dateDebutEnchere"));
-		dateDebutEnchere=Date.parseDate(request.getParameter("dateDebutEnchere"));
+		dateDebutEnchere=new Date(request.getParameter("dateDebutEnchere"));
+		dateFinEnchere=new Date(request.getParameter("dateFinEnchere"));
 		prixInitial=Integer.parseInt(request.getParameter("prixInitial"));
 		prixVente=Integer.parseInt(request.getParameter("prixVente"));
 		noUtilisateur=Integer.parseInt(request.getParameter("noUtilisateur"));
 		noCategorie=Integer.parseInt(request.getParameter("noCategorie"));
 		
 		
-		a=new ArticleVendu(nomArticle, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixVente, noUtilisateur, noCategorie);
+		a=new ArticleVendu(nomArticle, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixVente, 
+				(Utilisateur)(request.getSession().getAttribute("userConnected")), null, null, null);
 		ArticleVenduManager.getInstance().save(a);
 		
 		request.getSession().setAttribute("Userconnected",a);
