@@ -14,7 +14,7 @@ import fr.eni.ecole.encheres.bo.Utilisateur;
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/Login")
+@WebServlet("/login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -24,7 +24,7 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/P2IdentifierCreerCompte.jsp").forward(request, response);
+		//getServletContext().getRequestDispatcher("/ProjetEncheres/P2IdentifierCreerCompte.jsp").forward(request, response);
 	}
 
 	/**
@@ -42,10 +42,10 @@ public class Login extends HttpServlet {
 			coo.setMaxAge(7*24*60*60);
 			response.addCookie(coo);
 			request.getSession().setAttribute("userConnected", u);
-			response.sendRedirect("login");/*a connecter avec servlet P4*/
+			response.sendRedirect("/ProjetEncheres/P2IdentifierCreerCompte.jsp");
 		}
 		else {
-			response.sendRedirect("login");
+			response.sendRedirect("/ProjetEncheres/P4P5AccueilCo.jsp");
 		}
 	}
 

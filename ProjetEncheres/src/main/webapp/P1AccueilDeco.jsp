@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%@page import = "java.util.List,fr.eni.ecole.encheres.bll.ArticleVenduManager" %>
+   <%@page import = "java.util.List,fr.eni.ecole.encheres.bo.ArticleVendu" %>
+   <%@page import = "java.util.List,fr.eni.ecole.encheres.bo.ArticleVendu" %>
+   <%@page import = "java.util.List,fr.eni.ecole.encheres.bll.ArticleVenduManager" %>
+   <%@page import = "java.util.List,fr.eni.ecole.encheres.dal.ArticleVenduDAO" %>
+   <%@page import = "java.util.List,fr.eni.ecole.encheres.bll.EnchereManager" %>
+   <%@page import = "java.util.List,fr.eni.ecole.encheres.bll.UtilisateurManager" %>
+   <%@page import = "java.util.List,fr.eni.ecole.encheres.bo.Utilisateur" %>
+   <%@page import = "java.util.List,fr.eni.ecole.encheres.dal.UtilisateurDAO" %>
+   <%@page import = "java.util.List" %>
+   <%@page import = "java.util.Date" %>
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,23 +52,6 @@
 		        <h1>Enchères En Cours</h1>
 		    </div>
 		    
-		    <div>
-		    	<fieldset>
-		        <h1>Article-1</h1>
-		        <div><img src="image.jpg" alt="Image de l'article encours d'enchères" title="Article aux enchères" width="50" height="50"></div>
-		    	<table>
-		    		<tr>
-			    		<td>Prix : </td>
-			    		<td>210 points </td>
-			    	</tr>
-			    	<tr>
-			    		<td>Fin de l'enchere : </td>
-			    		<td>10/08/2018</td>
-			    	</tr>
-			    	<tr>
-			    		<td>Vendeur</td>
-			    		<td>jojo44</td>
-			    	</tr>
 		    	</table>
 		    	</fieldset>
 		    </div>

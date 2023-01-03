@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,21 +16,20 @@
     
     </header>
     
-    <form name="" method="post" action="">
+    <form method="post" action="login">
        <label for="identifiant">Identifiant : </label> 
-       <input type="text" name="identifiant" placeholder="Votre identifiant" autofocus="autofocus" id="Identifiant" required="required"/> <br>
+       <input type="text" name="identifiant" value="${cookie.lastlogin.value}" placeholder="Votre identifiant" autofocus="autofocus" id="Identifiant"/> <br>
 
        <label for="Mot de passe">Mot de passe : </label>
        <input type="password" name="motdepasse" id="Motdepasse"/> <br>
 
-        <input type="button" value="Connexion" id="Connexion"> <br>
+       <form action="/ProjetEncheres/P4P5AccueilCo.jsp" method="get" target="_blank"> <button type="submit">Connexion</button> </form>
 
         <input type="checkbox" name="Sesouvenirdemoi"/>Se souvenir de moi <br>
     
-        <a href="" id="Mdpoublie"> Mot de passe oublié </a> <br>
+        <a href="" id="Mdpoublie"> Mot de passe oubliÃ© </a> <br>
 
-        !--<input type="button" value="Créer un compte" id="Creeruncompte">--!
-        <a href="P3AjouterCreerProfil.jsp">Créer un compte</a>
+        <form action="/ProjetEncheres/P3AjouterCreerProfil.jsp" method="get" target="_blank"> <button type="submit">CrÃ©er un compte</button> </form>
         
     
     </form>  

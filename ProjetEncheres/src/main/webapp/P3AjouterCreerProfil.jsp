@@ -11,7 +11,7 @@
 	<h1>Ajout d'un utilisateur</h1>
 	
 	<div class="formulaireAjoutUtilisateur">
-	<form method="post" action="ajouter">
+	<form method="post" action="ajouterUtilisateur">
 	Pseudo : <input type="text" name="pseudo" id="pseudo" required="required"> <br>
 	Nom : <input type="text" name="nom" id="nom" required="required"> <br>
 	Prenom : <input type="text" name="prenom" id="prenom" required="required"> <br>
