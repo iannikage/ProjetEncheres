@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,21 +16,15 @@
 
 	<div class="AfficherInfosPerso">
 	
-		<p id="pseudo">Pseudo :</p> < ! -- Ajout code récupérer -- > 
-		
-		<p id="nom">Nom :</p> < ! -- Ajout code récupérer -- > 
+		//<p> Pseudo : ${ userConnected.pseudo }</p> 
+		<p> Nom : ${ utilisateur.nom }</p> 
+		<p> PrÃ©nom : ${ utilisateur.prenom }</p> 
+		<p> Email : ${ utilisateur.email }</p> 
+		<p> TÃ©lÃ©phone : ${ utilisateur.telephone }</p> 
+		<p> Rue : ${ utilisateur.rue }</p> 
+		<p> Code Postal : ${ utilisateur.codePostal }</p> 
+		<p> Ville : ${ utilisateur.ville }</p> 
 	
-		<p id="prenom">Prénom :</p> < ! -- Ajout code récupérer -- > 
-		
-		<p id="email">Email :</p> < ! -- Ajout code récupérer -- > 
-	
-		<p id="telephone">Téléphone :</p> < ! -- Ajout code récupérer -- > 
-	
-		<p id="rue">Rue :</p> < ! -- Ajout code récupérer -- > 
-	
-		<p id="codePostal">Code postal :</p> < ! -- Ajout code récupérer -- > 
-	
-		<p id="ville">Ville :</p> < ! -- Ajout code récupérer -- > 
 		
 	</div>
 

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
 <html>
@@ -16,37 +16,22 @@
     </header>
 
  <div class="ModifierInfosPerso">
-    
-    <label for="pseudo">Pseudo : </label> 
-       <input type="text" name="pseudo" placeholder="RECUPERER PSEUDO" autofocus="autofocus" id="pseudo" /> <br>
 
-    <label for="Nom">Nom : </label> 
-       <input type="text" name="Nom" placeholder="RECUPERER Nom" autofocus="autofocus" id="nom" /> <br>
-
-    <label for="Prenom">Prénom : </label> 
-       <input type="text" name="prenom" placeholder="RECUPERER Prénom" autofocus="autofocus" id="prenom" /> <br>
-   
-    <label for="Email">Email : </label> 
-       <input type="text" name="email" placeholder="RECUPERER email" autofocus="autofocus" id="email" /> <br>
-   
-    <label for="Telephone">Prénom : </label> 
-       <input type="text" name="telephone" placeholder="RECUPERER Téléphone" autofocus="autofocus" id="telephone" /> <br>
-   
-    <label for="Rue">Rue : </label> 
-       <input type="text" name="rue" placeholder="RECUPERER rue" autofocus="autofocus" id="rue" /> <br>
-      
-    <label for="CodePostal">Code postal : </label> 
-       <input type="text" name="codepostal" placeholder="RECUPERER codepostal" autofocus="autofocus" id="codepostal" /> <br>
-   
-    <label for="Ville">Ville : </label> 
-       <input type="text" name="ville" placeholder="RECUPERER Ville" autofocus="autofocus" id="ville" /> <br>
-
+	<form method="post" action="modifierUtilisateur">
+		//<p> Pseudo : ${ userConnected.pseudo }</p> 
+		<p> Nom : ${ userConnected.nom }</p> 
+		<p> PrÃ©nom : ${ userConnected.prenom }</p> 
+		<p> Email : ${ userConnected.email }</p> 
+		<p> TÃ©lÃ©phone : ${ userConnected.telephone }</p> 
+		<p> Rue : ${ userConnected.rue }</p> 
+		<p> Code Postal : ${ userConnected.codePostal }</p> 
+		<p> Ville : ${ userConnected.ville }</p> 
+   </form>
  </div>
 
 
-<input class="Modifier"
-       type="button"
-       value="Modifier">
+<input type="submit" name="action" value="modifier">
+<form action="/ProjetEncheres/P8ModifSupp.jsp" method="get" target="_blank"> <button type="submit">Modifier</button> </form>
 
 </body>
 </html>
