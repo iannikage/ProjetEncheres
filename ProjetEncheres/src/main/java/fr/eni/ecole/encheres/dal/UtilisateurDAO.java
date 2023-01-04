@@ -217,11 +217,14 @@ public class UtilisateurDAO {
 	public Utilisateur login(String email,String motDePasse) 
 	{
 		Utilisateur utilisateur=null;
+		System.out.println(email);
+		System.out.println(motDePasse);
 		try {
 			Connection con = connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Utilisateurs where email=? and mot_de_passe=?");
+			PreparedStatement pstmt = con.prepareStatement("SELECT * FROM Utilisateurs where (pseudo=? or email=?) and mot_de_passe=?");
 			pstmt.setString(1,email);
-			pstmt.setString(2,motDePasse);
+			pstmt.setString(2,email);
+			pstmt.setString(3,motDePasse);
 			ResultSet res = pstmt.executeQuery();
 			if(res.next()) 
 			{ 
@@ -229,6 +232,7 @@ public class UtilisateurDAO {
 				
 			}
 			con.close();
+			System.out.println(utilisateur);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 

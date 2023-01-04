@@ -25,8 +25,8 @@ public class RetraitManager {
 		retraitDAO.save(retrait);
 	}
 	
-	public List<Retrait> findAll(String field, String sens) {
-		return retraitDAO.findAll(field, sens);
+	public List<Retrait> findAll() {
+		return retraitDAO.findAll();
 	}
 	
 	

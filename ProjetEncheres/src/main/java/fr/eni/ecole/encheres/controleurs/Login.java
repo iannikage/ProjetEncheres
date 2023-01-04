@@ -33,8 +33,8 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pseudo, motDePasse;	
 		Utilisateur u;
-		pseudo=request.getParameter("pseudo");
-		motDePasse=request.getParameter("motDePasse");
+		pseudo=request.getParameter("identifiant");
+		motDePasse=request.getParameter("motdepasse");
 		u=UtilisateurManager.getInstance().login(pseudo, motDePasse);
 		if(u!=null) {
 			Cookie coo;
@@ -42,10 +42,10 @@ public class Login extends HttpServlet {
 			coo.setMaxAge(7*24*60*60);
 			response.addCookie(coo);
 			request.getSession().setAttribute("userConnected", u);
-			response.sendRedirect("/ProjetEncheres/P2IdentifierCreerCompte.jsp");
+			response.sendRedirect("/ProjetEncheres/P4P5AccueilCo.jsp");
 		}
 		else {
-			response.sendRedirect("/ProjetEncheres/P4P5AccueilCo.jsp");
+			response.sendRedirect("/ProjetEncheres/P2IdentifierCreerCompte.jsp");
 		}
 	}
 

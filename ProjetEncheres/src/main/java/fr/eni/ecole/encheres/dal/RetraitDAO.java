@@ -29,17 +29,13 @@ public class RetraitDAO {
 
 		try {
 			Connection con = ConnexionDAO.connectionBDD();
-			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Retraits (rue,code_postal,ville) VALUES (?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
-			pstmt.setString(1, retrait.getRue());
-			pstmt.setString(2, retrait.getCodePostal());
-			pstmt.setString(3, retrait.getVille());
+			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Retraits (no_article,rue,code_postal,ville) VALUES (?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt.setInt(1, retrait.getArticlesVendus().getNoArticle());
+			pstmt.setString(2, retrait.getRue());
+			pstmt.setString(3, retrait.getCodePostal());
+			pstmt.setString(4, retrait.getVille());
 			
-		
 			pstmt.executeUpdate();
-			ResultSet cles=pstmt.getGeneratedKeys();
-			cles.next();
-			retrait.set(cles.getInt(1));
-
 
 			con.close();
 

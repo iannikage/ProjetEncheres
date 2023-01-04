@@ -1,5 +1,6 @@
 package fr.eni.ecole.encheres.bll;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import fr.eni.ecole.encheres.bo.Enchere;
@@ -30,7 +31,7 @@ public class EnchereManager {
 		return enchereDAO.findAll();
 	}
 		
-	public List<Enchere> getByUtilisateur (Utilisateur encherisseur, boolean ouvertes, boolean enCours, boolean remportees){
+	public List<Enchere> getByUtilisateur (Utilisateur encherisseur, boolean ouvertes, boolean enCours, boolean remportees) throws SQLException{
 			return EnchereDAO.getInstance().getByNoUtilisateur(encherisseur.getNoUtilisateur(), ouvertes, enCours, remportees);
 	}
 	

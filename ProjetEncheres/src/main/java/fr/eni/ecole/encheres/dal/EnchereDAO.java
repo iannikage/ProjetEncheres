@@ -1,8 +1,7 @@
 package fr.eni.ecole.encheres.dal;
 
 import java.sql.Connection;
-
-
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,7 +32,7 @@ public class EnchereDAO {
 			Connection con = ConnexionDAO.connectionBDD();
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Enchere (date_enchere,montant_enchere,no_encherisseur,no_article) VALUES (?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, enchere.getNoEnchere());
-			pstmt.setDate(2, enchere.getDateEnchere());
+			pstmt.setDate(2,new Date(enchere.getDateEnchere().getTime()));
 			pstmt.setInt(3, enchere.getMontantEnchere());
 			pstmt.setInt(4, enchere.getEncherisseur().getNoUtilisateur());
 			pstmt.setInt(5, enchere.getArticleEncheri().getNoArticle());
