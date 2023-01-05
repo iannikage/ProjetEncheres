@@ -1,7 +1,8 @@
 package fr.eni.ecole.encheres.controleurs;
 
 import java.io.IOException;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,14 +36,21 @@ public class AjouterArticle extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String nomArticle, description;
-		Date dateDebutEnchere, dateFinEnchere;
+		Date dateDebutEnchere=null, dateFinEnchere=null;
 	 	int prixInitial, noCategorie;
 		ArticleVendu a;
-		nomArticle=request.getParameter("nomArticle");
+		request.setCharacterEncoding("UTF-8");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		nomArticle=request.getParameter("article");
 		description=request.getParameter("description");
 		noCategorie=Integer.parseInt(request.getParameter("categorie"));
-		dateDebutEnchere=new Date(request.getParameter("dateDebutEnchere"));
-		dateFinEnchere=new Date(request.getParameter("dateFinEnchere"));
+		try {
+			dateDebutEnchere=sdf.parse(request.getParameter("dateDebutEnchere"));
+			dateFinEnchere=sdf.parse(request.getParameter("dateFinEnchere"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		prixInitial=Integer.parseInt(request.getParameter("prixInitial"));
 		
 

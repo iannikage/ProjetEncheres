@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.ecole.encheres.bll.ArticleVenduManager;
+import fr.eni.ecole.encheres.bll.CategorieManager;
 import fr.eni.ecole.encheres.bo.ArticleVendu;
 import fr.eni.ecole.encheres.bo.Categorie;
 import fr.eni.ecole.encheres.bo.Enchere;
@@ -31,6 +32,10 @@ public class ListerArticle extends HttpServlet {
 		int noCategorie;
 		noCategorie= Integer.parseInt(request.getParameter("categorie"));
 		liste=ArticleVenduManager.getInstance().findByNoCategorie(noCategorie);
+
+		List<Categorie> listeCategorie;
+		listeCategorie=CategorieManager.getInstance().findAll();
+		request.setAttribute("listeCategorie", listeCategorie);
 		
 		request.setAttribute("liste", liste);
 		getServletContext().getRequestDispatcher("/P1AccueilDeco.jsp").forward(request,  response);

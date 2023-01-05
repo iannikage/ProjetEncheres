@@ -58,31 +58,16 @@
 		    	</table>
 		    	</fieldset>
 		    </div>
-		    <c:forEach items="${ liste }"  var="l">
-	    	${ l.nomArticle }
-	    	</c:forEach>
+		    <c:foreach items="${ liste }"  var="l"> <br>
+	    	Nom de l'article: ${ l.nomArticle } <br>
+	    	Decription: ${ l.description } <br>
+	    	Fin de l'enchère: ${ l.dateFinEnchere } <br>
+	    	Prix: ${ l.prixInitial } <br>
+	    	</c:foreach>
+	    	
 		    <br><br>
 		    
-		    <div>
-		    	<fieldset>
-		        <h1>Article-2</h1>
-		        <div><img src="image.jpg" alt="Image de l'article encours d'encheres" title="Article aux encheres" width="50" height="50"></div>
-		    	<table>
-		    		<tr>
-			    		<td>Prix : </td>
-			    		<td>210 points </td>
-			    	</tr>
-			    	<tr>
-			    		<td>Fin de l'enchere : </td>
-			    		<td>10/08/2018</td>
-			    	</tr>
-			    	<tr>
-			    		<td>Vendeur</td>
-			    		<td>jojo44</td>
-			    	</tr>
-		    	</table>
-		    	</fieldset>
-		    </div>
+		 
 	  
         </main>
         <br><br>
@@ -91,4 +76,3 @@
 </body>
 </html>
 
-::vu
