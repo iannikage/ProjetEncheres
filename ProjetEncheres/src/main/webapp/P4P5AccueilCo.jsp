@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +12,7 @@
 	<header>ENI-ENCHERES
 	<nav>
         	<ul>
-        		<li><a href="P9NouvelleVente.jsp">Vendre un article</a></li>
+        		<li><a href="/ProjetEncheres/ajouterArticle">Vendre un article</a></li>
         		<li><a href="P7ModifierProfil.jsp">Mon profil</a></li>
         		<li><a href="P1AccueilDeco.jsp">Déconnexion</a></li>
        		</ul>
@@ -19,21 +21,35 @@
 
     <main>
 
-	<h1>Liste des enchères</h1>
-	
-	Filtres : <br>
-	<input type="text" name="article" placeholder="Le nom de l'article" autofocus="autofocus"/>
-    <input type="submit" name="action" value="Rechercher"> <br>
-
-	<label for="Catégories">Catégories : </label>
-    	<select for="Catégories">
-    		<option value="toutes">Toutes les catégories</option>
-    		<option value="ameublement">Ameublement</option>
-    		<option value="livres">Livres</option>
-    		<option value="jouets">Jouets</option>
-    		<option value="informatique">Informatique</option>
-    		<option value="vehicules">Véhicules</option>
-		</select>
+	 <form method="get" action="ListerArticle">
+	        <h1>Liste des enchères</h1>
+	        <label for="maRecherche">Filtre : </label>
+	        <input type="search" id="maRecherche"  placeholder="Le nom de l'article"  name="maRecherche">
+	    	<button>Rechercher</button>
+	    	
+	    	
+	    	<br><br>
+	    	
+	    	<label for="categorie">Catégories : </label>
+	    	<select name="categorie">
+	    	<option value="0"> toutes</option>
+	    	<c:forEach items="${ listeCategorie }"  var="c">
+	    	<option value="${ c.noCategorie }">${ c.libelle }</option>
+	    	</c:forEach>
+	    	
+	    		
+			</select>
+			</form>
+		    <div>
+		        <h1>Enchères En Cours</h1>
+		    </div>
+		    
+		    	</table>
+		    	</fieldset>
+		    </div>
+		    <c:forEach items="${ liste }"  var="l">
+	    	${ l.nomArticle }
+	    	</c:forEach>
 		
     <br>
     <div>

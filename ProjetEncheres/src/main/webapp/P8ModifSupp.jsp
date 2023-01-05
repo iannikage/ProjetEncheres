@@ -10,22 +10,22 @@
 <h1>Modifier ou supprimer un profil</h1>
 
 	<div class="modifierSupprimerUtilisateur">
-	<form method="post" action="mettreAJour">
-	Pseudo : <input type="text" name="pseudo" id="pseudo" required="required"> <br>
-	Nom : <input type="text" name="nom" id="nom" required="required"> <br>
-	Prenom : <input type="text" name="prenom" id="prenom" required="required"> <br>
-	Telephone : <input type="tel" name="telephone" id="telephone" required="required"> <br>
-	Rue : <input type="text" name="rue" id="rue" required="required"> <br>
-	Ville : <input type="text" name="ville" id="ville" required="required"> <br>
-	Code Postal : <input type="text" name="codepostal" id="codepostal" required="required"> <br>
-	Email : <input type="email" name="email" id="email" required="required"> <br>
-	Mot de passe : <input type="password" name="password" id="password" required="required"> <br>
-	Confirmation : <input type="password" name="confirmation" required="required"> <br>
-	Credit : //code <br>
+	<form method="post" action="modifierUtilisateur">
+	Pseudo : <input type="text" name="pseudo" id="pseudo" required="required" value="${ userConnected.pseudo }"> <br>
+	Nom : <input type="text" name="nom" id="nom" value="${ userConnected.nom }"> <br>
+	Prenom : <input type="text" name="prenom" id="prenom" value="${ userConnected.prenom }"> <br>
+	Email : <input type="email" name="email" id="email" value="${ userConnected.email }"> <br>
+	Telephone : <input type="tel" name="telephone" id="telephone" value="${ userConnected.telephone }"> <br>
+	Rue : <input type="text" name="rue" id="rue" value="${ userConnected.rue }"> <br>
+	Code Postal : <input type="text" name="codepostal" id="codepostal" value="${ userConnected.codePostal }"> <br>
+	Ville : <input type="text" name="ville" id="ville" value="${ userConnected.ville }"> <br>
+	Mot de passe : <input type="password" name="password" id="password" value="${ userConnected.motDePasse }"> <br>
+	Confirmation : <input type="password" name="confirmation" value="${ userConnected.motDePasse }"> <br>
+	Credit : ${ userConnected.credit } <br>
 	
 	<input type="submit" name="action" value="Enregistrer">
-	<input type="submit" name="action" value="Supprimer mon compte">
-	//+code pour supprimer dans bdd
+
+	
 	</form>
 	</div>
 	

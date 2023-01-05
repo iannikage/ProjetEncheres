@@ -18,7 +18,7 @@
  <div class="ModifierInfosPerso">
 
 	<form method="post" action="modifierUtilisateur">
-		//<p> Pseudo : ${ userConnected.pseudo }</p> 
+		<p> Pseudo : ${ userConnected.pseudo }</p> 
 		<p> Nom : ${ userConnected.nom }</p> 
 		<p> Prénom : ${ userConnected.prenom }</p> 
 		<p> Email : ${ userConnected.email }</p> 
@@ -30,8 +30,11 @@
  </div>
 
 
-<input type="submit" name="action" value="modifier">
 <form action="/ProjetEncheres/P8ModifSupp.jsp" method="get" target="_blank"> <button type="submit">Modifier</button> </form>
+
+
+<form action="supprimerUtilisateur" method="get" target="_blank"> <button type="submit">Supprimer mon compte</button> </form>
+
 
 </body>
 </html>

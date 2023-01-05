@@ -53,6 +53,33 @@ public class CategorieDAO {
 		return categories;
 	}
 	
+	public Categorie findById(int noCategorie) {
+
+		Categorie categorie;
+		categorie=null;
+
+		try {
+			PreparedStatement pstmt;
+			Connection con = ConnexionDAO.connectionBDD();
+			
+				 pstmt= con.prepareStatement("SELECT * FROM Categories where no_categorie=? ");
+				 pstmt.setInt(1, noCategorie);
+			
+			ResultSet res = pstmt.executeQuery();
+
+			if (res.next()) {
+				categorie = new Categorie();
+				categorie.setNoCategorie(res.getInt("no_categorie"));
+				categorie.setLibelle(res.getString("libelle"));
+						
+			}
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return categorie;
+	}
+	
 }
 
     

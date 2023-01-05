@@ -22,32 +22,40 @@ public class ModifierUtilisateur extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+
+
+		protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	
 		int noUtilisateur;
 		Utilisateur u;
 		noUtilisateur=Integer.parseInt(request.getParameter("noUtilisateur"));
 		u=UtilisateurManager.getInstance().findByNoUtilisateur(noUtilisateur);
-		request.setAttribute("utilisateur", u);
-		getServletContext().getRequestDispatcher("/ProjetEncheres/P7Modifier.jsp").forward(request, response);
-	}
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
-		int noUtilisateur;
-		Utilisateur u;
-		noUtilisateur=Integer.parseInt(request.getParameter("noUtilisateur"));
-		u=UtilisateurManager.getInstance().findByNoUtilisateur(noUtilisateur);
-		u.setPseudo(request.getParameter("pseudo"));
-		u.setNom(request.getParameter("nom"));
-		u.setPrenom(request.getParameter("prenom"));
-		u.setEmail(request.getParameter("email"));
-		u.setMotDePasse(request.getParameter("password"));
-		UtilisateurManager.getInstance().update(u);
-		response.sendRedirect("lister");
-		
+		request.setAttribute("userConnected", u);
+		getServletContext().getRequestDispatcher("/ProjetEncheres/P7ModifierProfil.jsp").forward(request, response);
 	}
 
+	
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Utilisateur userConnected;
+		userConnected=(Utilisateur)(request.getSession().getAttribute("userConnected"));
+	
+		userConnected.setPseudo(request.getParameter("pseudo"));
+		userConnected.setNom(request.getParameter("nom"));
+		userConnected.setPrenom(request.getParameter("prenom"));
+		userConnected.setEmail(request.getParameter("email"));
+		userConnected.setTelephone(Integer.parseInt(request.getParameter("telephone")));
+		userConnected.setRue(request.getParameter("rue"));
+		userConnected.setCodePostal(Integer.parseInt(request.getParameter("codepostal")));
+		userConnected.setVille(request.getParameter("ville"));
+		userConnected.setMotDePasse(request.getParameter("password"));
+		
+		UtilisateurManager.getInstance().update(userConnected);
+		
+		response.sendRedirect("P7ModifierProfil.jsp");
+		}
+
 }
+
+

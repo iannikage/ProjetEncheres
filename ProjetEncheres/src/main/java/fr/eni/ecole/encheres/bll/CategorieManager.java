@@ -25,4 +25,8 @@ public class CategorieManager {
 	public List<Categorie> findAll() {
 		return categorieDAO.findAll();
 	}
+	
+	public Categorie findById(int id) {
+		return categorieDAO.findById(id);
+	}
 }

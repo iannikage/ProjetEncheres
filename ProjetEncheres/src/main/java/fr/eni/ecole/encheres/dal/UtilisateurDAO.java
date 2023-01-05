@@ -67,7 +67,7 @@ public class UtilisateurDAO {
 			Connection con = connectionBDD();
 
 			
-			PreparedStatement pstmt = con.prepareStatement("update Utilisateurs set pseudo=?,nom=?,prenom=?,email=?,telephone=?,rue=?,code_postal=?,ville=?,mot_de_passe=?");
+			PreparedStatement pstmt = con.prepareStatement("update Utilisateurs set pseudo=?,nom=?,prenom=?,email=?,telephone=?,rue=?,code_postal=?,ville=?,mot_de_passe=? where no_utilisateur=?");
 			
 			pstmt.setString(1, c.getPseudo());
 			pstmt.setString(2, c.getNom());
@@ -78,6 +78,7 @@ public class UtilisateurDAO {
 			pstmt.setInt(7, c.getCodePostal());
 			pstmt.setString(8, c.getVille());
 			pstmt.setString(9, c.getMotDePasse());
+			pstmt.setInt(10, c.getNoUtilisateur());
 			//securiser mdp avec hashPwd
 			
 			pstmt.executeUpdate();
@@ -126,21 +127,14 @@ public class UtilisateurDAO {
 	
 	
 	
-	public List<Utilisateur> findAll(String field, String sens) {
+	public List<Utilisateur> findAll() {
 
 		List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
 
 		try {
 			PreparedStatement pstmt;
 			Connection con = connectionBDD();
-			if(field!=null && sens!=null)
-			{
-				 pstmt= con.prepareStatement("SELECT * FROM Utilisateurs order by " + field + " " + sens);
-			}
-			else
-			{
-				 pstmt= con.prepareStatement("SELECT * FROM Utilisateurs ");
-			}
+			pstmt= con.prepareStatement("SELECT * FROM Utilisateurs ");
 
 			
 			ResultSet res = pstmt.executeQuery();

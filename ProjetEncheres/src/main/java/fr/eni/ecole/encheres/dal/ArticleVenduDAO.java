@@ -43,14 +43,14 @@ public class ArticleVenduDAO {
 		try {
 			Connection con = ConnexionDAO.connectionBDD();
 			PreparedStatement pstmt = con.prepareStatement("INSERT INTO Articles_Vendus (nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, no_vendeur, no_categorie) VALUES (?,?,?,?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
-			pstmt.setString(2, articleVendu.getNomArticle());
-			pstmt.setString(3, articleVendu.getDescription());
-			pstmt.setDate(4, new Date(articleVendu.getDateDebutEnchere().getTime()));
-			pstmt.setDate(5, new Date(articleVendu.getDateFinEnchere().getTime()));
-			pstmt.setInt(6, articleVendu.getPrixInitial());
-			pstmt.setInt(7, articleVendu.getPrixVente());
-			pstmt.setInt(8, articleVendu.getVendeur().getNoUtilisateur());
-			pstmt.setInt(9, articleVendu.getCategorieArticle().getNoCategorie());
+			pstmt.setString(1, articleVendu.getNomArticle());
+			pstmt.setString(2, articleVendu.getDescription());
+			pstmt.setDate(3, new Date(articleVendu.getDateDebutEnchere().getTime()));
+			pstmt.setDate(4, new Date(articleVendu.getDateFinEnchere().getTime()));
+			pstmt.setInt(5, articleVendu.getPrixInitial());
+			pstmt.setInt(6, articleVendu.getPrixVente());
+			pstmt.setInt(7, articleVendu.getVendeur().getNoUtilisateur());
+			pstmt.setInt(8, articleVendu.getCategorieArticle().getNoCategorie());
 		
 		
 			
