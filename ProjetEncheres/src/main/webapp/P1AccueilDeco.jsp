@@ -58,12 +58,12 @@
 		    	</table>
 		    	</fieldset>
 		    </div>
-		    <c:foreach items="${ liste }"  var="l"> <br>
+		    <c:forEach items="${ liste }"  var="l"> <br>
 	    	Nom de l'article: ${ l.nomArticle } <br>
 	    	Decription: ${ l.description } <br>
 	    	Fin de l'enchère: ${ l.dateFinEnchere } <br>
 	    	Prix: ${ l.prixInitial } <br>
-	    	</c:foreach>
+	    	</c:forEach>
 	    	
 		    <br><br>
 		    

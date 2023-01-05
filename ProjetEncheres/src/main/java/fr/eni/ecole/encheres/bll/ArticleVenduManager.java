@@ -67,5 +67,5 @@ public class ArticleVenduManager {
 		return ArticleVenduDAO.getInstance().getByNoUtilisateur(vendeur.getNoUtilisateur(), enCours, nonDebutees, terminees);
 	}
 	
-//vu
+
 }

@@ -36,8 +36,8 @@ public class UtilisateurManager {
 		utilisateurDAO.deleteByNoUtilisateur(noUtilisateur);
 	}
 
-	public List<Utilisateur> findAll(String field, String sens) {
-		return utilisateurDAO.findAll(field, sens);
+	public List<Utilisateur> findAll() {
+		return utilisateurDAO.findAll();
 	}
 
 	public Utilisateur findByNoUtilisateur(int noUtilisateur) {

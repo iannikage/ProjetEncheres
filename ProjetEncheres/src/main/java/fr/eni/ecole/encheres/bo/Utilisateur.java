@@ -22,7 +22,8 @@ public class Utilisateur {
 	public Utilisateur() {
 		
 	}
-	//pour la DAL
+
+	
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, int telephone,
 			String rue, int codePostal, String ville, String motDePasse, int credit, int administrateur) {
 		super();
@@ -39,7 +40,8 @@ public class Utilisateur {
 		this.credit = credit;
 		this.administrateur = administrateur;
 	}
-	//pour controleur (servlet)
+	
+	
 	public Utilisateur (String pseudo, String nom, String prenom, String email, int telephone,
 			String rue, int codePostal, String ville, String motDePasse, int credit, int administrateur) {
 		super();
